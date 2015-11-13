@@ -35,7 +35,9 @@
     "--executorHealthDelay", "{{elasticsearch.executor.health-delay}}",
     "--executorImage", "{{elasticsearch.executor.image}}",
     "--executorName", "{{elasticsearch.executor.name}}",
-    "--executorTimeout", "{{elasticsearch.executor.timeout}}"
+    "--executorTimeout", "{{elasticsearch.executor.timeout}}"{{#mantl.mesos.authentication-enabled}},
+    "--frameworkPrincipal", "{{mantl.mesos.principal}}",
+    "--frameworkSecretPath", "/etc/mesos/{{mant.mesos.principal}}"{{/mantl.mesos.authentication-enabled}}
   ],
   "env": {
     "JAVA_OPTS": "{{elasticsearch.scheduler.java-heap}}"
@@ -46,7 +48,14 @@
       "image": "{{elasticsearch.scheduler.image}}",
       "network": "HOST",
       "forcePullImage": {{elasticsearch.force-pull-image}}
-    }
+    }{{#mantl.mesos.authentication-enabled}},
+    "volumes": [
+      {
+        "containerPath": "/etc/mesos/{{mantl.mesos.principal}}",
+        "hostPath": "/etc/mesos/{{mantl.mesos.principal}}",
+        "mode": "RO"
+      }
+    ]{{/mantl.mesos.authentication-enabled}},
   },
   "ports": [{{elasticsearch.port}}],
   "requirePorts": true
