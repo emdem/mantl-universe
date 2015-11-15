@@ -55,7 +55,7 @@
         "hostPath": "/etc/mesos/{{mantl.mesos.principal}}",
         "mode": "RO"
       }
-    ]{{/mantl.mesos.authentication-enabled}},
+    ]{{/mantl.mesos.authentication-enabled}}
   },
   "ports": [{{elasticsearch.port}}],
   "requirePorts": true
