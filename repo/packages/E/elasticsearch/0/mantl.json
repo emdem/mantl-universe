@@ -4,14 +4,7 @@
   },
   "elasticsearch": {
     "executor": {
-      "cluster-name": "mantl",
-      "cpu": "0.2",
-      "ram": "128",
-      "instances": "1"
-    },
-    "scheduler": {
-      "cpu": "0.2",
-      "ram": "128"
+      "cluster-name": "mantl"
     }
   }
 }
